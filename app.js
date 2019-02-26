@@ -3,7 +3,10 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const static = require('koa-static')
+const convert = require('koa-convert')
 const path = require('path')
+
+const views = require('koa-views')
 
 const loggerGenerator = require('./middleware/logger-generator')
 const loggerAsync = require('./middleware/logger-async')
@@ -16,8 +19,16 @@ const app = new Koa()
 const router = require('./router')
 
 // Static relative path
-const staticPath = './upload-files/files'
-app.use(static(path.join(__dirname, staticPath)))
+const view = 'views'
+app.use(
+  views(path.join(__dirname, view), {
+    extension: 'ejs'
+  })
+)
+
+const statics = './static'
+
+app.use(static(path.join(__dirname, statics)))
 
 // MiddleWare logger
 // app.use(convert(loggerGenerator()))
@@ -31,33 +42,25 @@ app.use(bodyParser())
 // app.use(router.routes()).use(router.allowedMethods())
 
 app.use(async ctx => {
-  if (ctx.url === '/' && ctx.method === 'GET') {
-    // 当GET请求时候返回表单页面
-    let html = `
-      <h1>koa2 upload demo22222</h1>
-      <form method="POST" action="/upload.json" enctype="multipart/form-data">
-        <p>file upload</p>
-        <span>picName:</span><input name="picName" type="text" /><br/>
-        <input name="file" type="file" /><br/><br/>
-        <button type="submit">submit</button>
-      </form>
-    `
-    ctx.body = html
-  } else if (ctx.url === '/upload.json' && ctx.method === 'POST') {
+  if (ctx.method === 'GET') {
+    let title = 'upload pic async'
+    await ctx.render('index', {
+      title
+    })
+  } else if (ctx.url === '/api/picture/upload.json' && ctx.method === 'POST') {
     // 上传文件请求处理
     let result = { success: false }
-    let serverFilePath = path.join(__dirname, 'upload-files')
+    let serverFilePath = path.join(__dirname, 'static/image')
 
     // 上传文件事件
     result = await uploadFile(ctx, {
-      fileType: 'files', // common or album
+      fileType: 'album',
       path: serverFilePath
     })
-
     ctx.body = result
   } else {
     // 其他请求显示404
-    return ctx
+    ctx.body = '<h1>404！！！ o(╯□╰)o</h1>'
   }
 })
 
