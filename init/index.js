@@ -1,6 +1,4 @@
 /* 初始化入口文件 */
-
-const fs = require('fs')
 const getSqlContentMap = require('./utils/get-sql-content-map')
 const { query } = require('./utils/db')
 

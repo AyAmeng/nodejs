@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "node go",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AyAmeng/nodejs.git"
@@ -19,13 +16,24 @@
     "url": "https://github.com/AyAmeng/nodejs/issues"
   },
   "homepage": "https://github.com/AyAmeng/nodejs#readme",
+  "scripts": {
+    "dev:server": "nodemon ./server/app.js",
+    "init:sql": "nodemon ./init/index.js"
+  },
   "devDependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.15.0",
-    "mysql": "^2.16.0"
+    "koa-logger": "^3.2.0",
+    "koa-mysql-session": "^0.0.2",
+    "koa-session-minimal": "^3.0.4",
+    "koa-views": "^6.1.5",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.10",
+    "validator": "^10.11.0"
   },
   "dependencies": {
     "koa": "^2.7.0",
-    "koa-bodyparser": "3",
+    "koa-bodyparser": "^4.2.1",
     "koa-convert": "^1.2.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0"
