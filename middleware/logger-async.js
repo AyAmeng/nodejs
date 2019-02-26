@@ -1,8 +1,8 @@
 function log(ctx) {
   console.info(
-    'Async Logger Method:',
+    'Async Logger Method: ',
     ctx.method,
-    'Host:',
+    'Host is:',
     ctx.header.host + ctx.url
   )
 }
