@@ -11,7 +11,7 @@ const userCode = require('./../codes/user')
 const user = {
   /**
    * 创建用户
-   * @param  {object} user 用户信息
+   * @param  {object} user: Model 用户信息
    * @return {object}      创建结果
    */
   async create(user) {
@@ -73,10 +73,10 @@ const user = {
       message: ''
     }
 
-    if (/[a-z0-9\_\-]{6,16}/.test(userInfo.userName) === false) {
-      result.message = userCode.ERROR_USER_NAME
-      return result
-    }
+    // if (/[a-z0-9\_\-]{6,16}/.test(userInfo.userName) === false) {
+    //   result.message = userCode.ERROR_USER_NAME
+    //   return result
+    // }
     if (!validator.isEmail(userInfo.email)) {
       result.message = userCode.ERROR_EMAIL
       return result

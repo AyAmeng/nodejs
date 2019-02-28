@@ -11,6 +11,8 @@ const MysqlStore = require('koa-mysql-session')
 const config = require('./../config/index')
 const routers = require('./routers/index')
 
+const cors = require('./middleware/cors')
+
 const app = new Koa()
 
 // session存储配置
@@ -20,6 +22,9 @@ const sessionMysqlConfig = {
   database: config.database.DATABASE,
   host: config.database.HOST
 }
+
+// Cors Header && Options Handler
+app.use(cors())
 
 // 配置session中间件
 app.use(

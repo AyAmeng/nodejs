@@ -52,7 +52,7 @@ module.exports = {
       message: '',
       data: null
     }
-
+    console.info(formData)
     let validateResult = userInfoService.validatorSignUp(formData)
 
     if (validateResult.success === false) {
@@ -65,11 +65,11 @@ module.exports = {
     console.log(existOne)
 
     if (existOne) {
-      if (existOne.name === formData.userName) {
-        result.message = userCode.FAIL_USER_NAME_IS_EXIST
-        ctx.body = result
-        return
-      }
+      // if (existOne.name === formData.userName) {
+      //   result.message = userCode.FAIL_USER_NAME_IS_EXIST
+      //   ctx.body = result
+      //   return
+      // }
       if (existOne.email === formData.email) {
         result.message = userCode.FAIL_EMAIL_IS_EXIST
         ctx.body = result
@@ -145,5 +145,19 @@ module.exports = {
       result.code = ''
     }
     return result
+  },
+
+  /* 
+  login
+   */
+
+  async login(ctx) {
+    const body = ctx.request.body
+
+    console.info('body', body)
+    ctx.body = {
+      code: 0,
+      data: body
+    }
   }
 }
