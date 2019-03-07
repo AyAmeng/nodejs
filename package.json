@@ -18,7 +18,8 @@
   "homepage": "https://github.com/AyAmeng/nodejs#readme",
   "scripts": {
     "dev:server": "nodemon ./server/app.js",
-    "init:sql": "nodemon ./init/index.js"
+    "init:sql": "nodemon ./init/index.js",
+    "debug": "nodemon --inspect ./server/app.js"
   },
   "devDependencies": {
     "ejs": "^2.6.1",
